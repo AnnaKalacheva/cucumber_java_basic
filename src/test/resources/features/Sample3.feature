@@ -1,5 +1,5 @@
 @regression
-Feature: Introduction to cucumber part 3
+Feature: Introduction to cucumber part 3  //  ???
   As a test engineer
   I want to be able to write and execute a scenario outline
 
@@ -20,4 +20,19 @@ Feature: Introduction to cucumber part 3
     Examples:
       | name | age | message                   |
       | Tom  | 15  | Hello, Tom, you are a kid |
+
+  Scenario Outline: a new scenario 2 outline
+    Given  I open action page
+    And I enter number <number> in number field
+    And I click Result
+    Then I see text: "You entered number: "<number>""
+
+    Examples:
+    | number |
+    | 1      |
+    | 2      |
+    | 3      |
+
+
+
 
