@@ -1,9 +1,11 @@
 package stepDefinitions;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -99,5 +101,71 @@ public class SampleSteps {
     @Given("^I am on action page$")
     public void iAmOnActionPage() {
         driver.get("https://kristinek.github.io/site/examples/actions");
+    }
+
+    @And("^I should see some text$")
+    public void iShouldSeeSomeText() throws Throwable {
+        assertTrue(driver.findElement(By.tagName("p")).isDisplayed());
+        System.out.println(driver.findElement(By.tagName("p")).getText());
+    }
+
+    @When("^I am on style page$")
+    public void iAmOnStylePage() throws Throwable {
+        driver.get("https://kristinek.github.io/site/examples/styles");
+    }
+
+    @Then("^I should see style page header$")
+    public void iShouldSeeStylePageHeader() throws Throwable {
+        assertEquals("Lorem ipsum",
+                driver.findElement(By.cssSelector("h1")).getText());
+    }
+
+    @And("^I click result$")
+    public void iClickResult() throws Throwable {
+        driver.findElement(By.id("result_button_number")).click();
+    }
+
+    @Then("^I see text: \"([^\"]*)\"(\\d+)\"([^\"]*)\"$")
+    public void iSeeText(String arg0, int arg1, String arg2) throws Throwable {
+        assertTrue(driver.findElement(By.id("result_number")).isDisplayed());
+    }
+
+    @And("^I enter number: \"(\\d+)\"$")
+    public void iEnterNumber(int number) throws Throwable {
+        driver.findElement(By.id("number")).clear();
+        driver.findElement(By.id("number")).sendKeys(String.valueOf(number));
+    }
+
+    @Given("^I am on Enter a number page$")
+    public void iAmOnEnterANumberPage() throws Throwable {
+        driver.get("https://kristinek.github.io/site/tasks/enter_a_number");
+    }
+
+    @When("^I enter correct number: (\\d+)$")
+    public void iEnterCorrectNumber(String number) throws Throwable {
+        driver.findElement(By.id("numb")).sendKeys(number);
+    }
+
+    @And("^I click Submit$")
+    public void iClickSubmit() throws Throwable {
+        driver.findElement(By.xpath("//*[@onclick]")).click();
+    }
+
+    @Then("^I see alert message$")
+    public void iSeeAlertMessage() throws Throwable {
+        Alert alert = driver.switchTo().alert();
+        assertTrue(alert.getText().contains("Square root of"));
+    }
+
+    @And("^I press Ok$")
+    public void iPressOk() throws Throwable {
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+    }
+
+    @Then("^I see error message: (.+)$")
+    public void iSeeErrorMessage(String errorMsg) throws Throwable {
+        String errorMessage = driver.findElement(By.id("ch1_error")).getText();
+        assertEquals(errorMsg, errorMessage);
     }
 }
