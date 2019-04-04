@@ -6,7 +6,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.Map;
@@ -96,8 +95,46 @@ public class SampleSteps {
         assertEquals(message, driver.findElement(By.id("result_checkbox")).getText());
     }
 
+    @Given("^I open action page$")
+    public void iOpenActionPage() throws Throwable {
+        iAmOnActionPage();
+    }
+
     @Given("^I am on action page$")
     public void iAmOnActionPage() {
         driver.get("https://kristinek.github.io/site/examples/actions");
+    }
+
+    @And("^I should see some text$")
+    public void iShouldSeeSomeText() throws Throwable {
+        assertTrue(driver.findElement(By.tagName("p")).isDisplayed());
+        assertEquals("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                driver.findElement(By.tagName("p")).getText());
+    }
+
+    @When("^I open styles page$")
+    public void iOpenStylesPage() throws Throwable {
+        driver.get("https://kristinek.github.io/site/examples/styles");
+    }
+
+    @Then("^Correct header is seen$")
+    public void correctHeaderIsSeen() throws Throwable {
+        assertEquals("Lorem ipsum", driver.findElement(By.tagName("h1")).getText());
+    }
+
+    @And("^I enter number (\\d+) in number field$")
+    public void iEnterNumberInNumberField(int num) throws Throwable {
+        driver.findElement(By.id("number")).clear();
+        driver.findElement(By.id("number")).sendKeys(Integer.toString(num));
+    }
+
+    @And("^I click Result$")
+    public void iClickResult() throws Throwable {
+        driver.findElement(By.id("result_button_number")).click();
+    }
+
+    @Then("^I see text: \"(.*)\"$")
+    public void iSeeText(String message) throws Throwable {
+        assertEquals(message, driver.findElement(By.id("result_number")).getText());
     }
 }
