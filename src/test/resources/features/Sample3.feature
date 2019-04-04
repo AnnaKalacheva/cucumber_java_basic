@@ -21,3 +21,20 @@ Feature: Introduction to cucumber part 3
       | name | age | message                   |
       | Tom  | 15  | Hello, Tom, you are a kid |
 
+
+@wowT1
+Scenario Outline:  A neeeeew scenario outline
+    Given  I open action page
+    And I enter number <number> in number field
+    And I click Result
+    Then I see text: "You entered number: "<number>""
+
+  @wowNum
+  Examples:
+    | number  |
+    | 5       |
+    | 8       |
+    | 12      |
+
+
+
