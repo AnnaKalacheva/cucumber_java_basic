@@ -1,5 +1,5 @@
 Feature: Introduction to cucumber Task1
-
+  @test
   Scenario Outline: a new scenario outline
     Given I am on Enter a number page
     When I enter number: "<number>"
@@ -11,7 +11,7 @@ Feature: Introduction to cucumber Task1
     | 20     | Number is too small    |
     | 120    | Number is too big      |
     | qwerty | Please enter a number  |
-
+  @test
   Scenario: a new scenario 2 with regex
     Given I am on Enter a number page
     When I enter number 64 in the field
