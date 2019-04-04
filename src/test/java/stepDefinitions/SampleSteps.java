@@ -4,6 +4,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -139,4 +140,50 @@ public class SampleSteps {
         String actualText = driver.findElement(By.id("result_number")).getText();
         assertEquals(expectedText, actualText);
     }
+
+
+    @Given("^I am on number page$")
+    public void iOpenActionPage1() {
+        driver.get("https://kristinek.github.io/site/tasks/enter_a_number \n");
+    }
+
+    @And("^I enter number: (.*)$")
+    public void iEnterNumberInNumberField1(String num) {
+        driver.findElement(By.id("numb")).clear();
+        driver.findElement(By.id("numb")).sendKeys(num);
+    }
+
+    @And("^I click submit$")
+    public void iClickResult1() {
+        driver.findElement(By.cssSelector("button")).click();
+    }
+
+    @Then("^I see error: (.+)$")
+    public void iSeeText1(String expectedText) throws Throwable {
+        String actualText = driver.findElement(By.id("ch1_error")).getText();
+        assertEquals(expectedText, actualText);
+    }
+
+    @Given("^I am on num page$")
+    public void iOpenActionPage2() {
+        driver.get("https://kristinek.github.io/site/tasks/enter_a_number \n");
+    }
+
+    @And("^I enter num: (.*)$")
+    public void iEnterNumberInNumberField2(String num) {
+        driver.findElement(By.id("numb")).clear();
+        driver.findElement(By.id("numb")).sendKeys(num);
+    }
+
+    @And("^I click submitButton$")
+    public void iClickResult2() {
+        driver.findElement(By.cssSelector("button")).click();
+    }
+
+    @Then("^I see alertMessage: (.+)$")
+    public void iSeeText2(String expectedText) throws Throwable {
+        Alert alert = driver.switchTo().alert();
+        assertEquals(expectedText, alert.getText());
+    }
+
 }
