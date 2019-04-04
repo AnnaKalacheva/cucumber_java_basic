@@ -21,3 +21,14 @@ Feature: Introduction to cucumber part 3
       | name | age | message                   |
       | Tom  | 15  | Hello, Tom, you are a kid |
 
+    @myscenarios
+    Scenario Outline: hgfhgfgh
+    Given  I open action page
+    And I enter number <number> in number field
+    And I click Result
+    Then I see text: "You entered number: "<number>""
+
+    Examples:
+      | number  |
+      | 5       |
+      | 64      |

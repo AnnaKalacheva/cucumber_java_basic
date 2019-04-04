@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -40,6 +41,12 @@ public class SampleSteps {
 
     @When("^I enter name: \"([^\"]*)\"$")
     public void iEnterName(String name) throws Throwable {
+        driver.findElement(By.id("name")).clear();
+        driver.findElement(By.id("name")).sendKeys(name);
+    }
+
+    @When("^I enter name: (.*)$")
+    public void iEnterName2(String name) throws Throwable {
         driver.findElement(By.id("name")).clear();
         driver.findElement(By.id("name")).sendKeys(name);
     }
@@ -100,4 +107,48 @@ public class SampleSteps {
     public void iAmOnActionPage() {
         driver.get("https://kristinek.github.io/site/examples/actions");
     }
+
+    @And("^i should see some text$")
+    public void iShouldSeeSomeText() {
+        driver.findElement(By.tagName("p")).isDisplayed();
+    }
+
+    @When("^I open styles page$")
+    public void iOpenStylesPage() {
+        driver.get("https://kristinek.github.io/site/examples/styles");
+    }
+
+    @Then("^correct header is seen$")
+    public void correctHeaderIsSeen() {
+        assertTrue(driver.findElement(By.xpath("//h1[@class='w3-jumbo']")).getText().equals("Lorem ipsum"));
+        assertEquals("Lorem Ipsum", driver.findElement(By.xpath("//h1[@class='w3-jumbo']")));
+// eto odno i toze
+    }
+
+    @Given("^I open action page$")
+    public void iOpenActionPage() {
+        driver.get("https://kristinek.github.io/site/examples/actions");
+    }
+
+    @And("^I enter number (\\d+) in number field$")
+    public void iEnterNumberInNumberField(String arg0) {
+        driver.findElement(By.xpath("//input[@id='number']")).clear();
+        driver.findElement(By.xpath("//input[@id='number']")).sendKeys(arg0);
+
+    }
+
+    @And("^I click Result$")
+    public void iClickResult() {
+        driver.findElement(By.xpath("//button[@id='result_button_number']")).click();
+
+    }
+
+    @Then("^I see text: \"(.*)\"$")
+    public void iSeeText(String message) throws Throwable {
+        assertEquals(message,
+                driver.findElement(By.xpath("//p[@id='result_number']")).getText());
+    }
+
+
+
 }
