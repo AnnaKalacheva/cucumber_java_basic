@@ -1,9 +1,11 @@
 package stepDefinitions;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -99,5 +101,97 @@ public class SampleSteps {
     @Given("^I am on action page$")
     public void iAmOnActionPage() {
         driver.get("https://kristinek.github.io/site/examples/actions");
+    }
+
+    @And("^I should see a paragraph$")
+    public void iShouldSeeAParagraph() throws Throwable {
+       assertTrue(driver.findElement(By.tagName("p")).isDisplayed());
+    }
+
+    @When("^I open styles page$")
+    public void iOpenStylesPage() throws Throwable {
+        driver.get("https://kristinek.github.io/site/examples/styles");
+    }
+
+    @Then("^correct header is seen$")
+    public void correctHeaderIsSeen() throws Throwable {
+        assertEquals("Lorem ipsum", driver.findElement(By.tagName("h1")).getText());
+    }
+
+    @When("^I open locators page$")
+    public void iOpenLocatorsPage() throws Throwable {
+        driver.get("https://kristinek.github.io/site/examples/locators");
+    }
+
+    @Then("^I see (\\d+) elements with class \"([^\"]*)\"$")
+    public void iSeeFiveElemetsWithClass(int num, String testClass) throws Throwable {
+        List<WebElement> singleClass = driver.findElements(By.cssSelector("." + testClass));
+        assertEquals(num, singleClass.size());
+    }
+
+    @Given("^I open action page$")
+    public void iOpenActionPage() throws Throwable {
+        driver.get("https://kristinek.github.io/site/examples/actions");
+    }
+
+
+    @And("^I enter number (.+) in number field$")
+    public void iEnterNumberInNumberField(String num) throws Throwable {
+        WebElement numField = driver.findElement(By.id("number"));
+        numField.clear();
+        numField.sendKeys(num);
+    }
+
+
+    @And("^I click Result$")
+    public void iClickResult() throws Throwable {
+        driver.findElement(By.id("result_button_number")).click();
+    }
+
+    @Then("^I see text: \"(.+)\"$")
+    public void iSeeText(String text) throws Throwable {
+        assertEquals(text, driver.findElement(By.id("result_number")).getText());
+    }
+
+
+    @Given("^I open enter a number page$")
+    public void iOpenEnterANumberPage() throws Throwable {
+        driver.get("https://kristinek.github.io/site/tasks/enter_a_number");
+    }
+
+    @When("^I enter invalid input (.*) in the number field$")
+    public void iEnterInvalidInputInputInTheNumberField(String input) throws Throwable {
+        driver.findElement(By.id("numb")).sendKeys(input);
+    }
+
+    @And("^I click on submit button$")
+    public void iClickOnSubmitButton() throws Throwable {
+        driver.findElement(By.cssSelector(".w3-btn.w3-orange.w3-margin")).click();
+    }
+
+    @Then("^I see error message (.*)$")
+    public void iSeeErrorMessageInput(String input) throws Throwable {
+        try {
+            int num = Integer.parseInt(input);
+            if(num < 50) {
+                assertEquals("Number is too small", driver.findElement(By.id("ch1_error")).getText());
+            } else if (num > 100) {
+                assertEquals("Number is too big", driver.findElement(By.id("ch1_error")).getText());
+            }
+        } catch (NumberFormatException e) {
+            assertEquals("Please enter a number", driver.findElement(By.id("ch1_error")).getText());
+        }
+    }
+
+    @When("^I enter (\\d+) in the number field$")
+    public void iEnterInTheNumberField(int num) throws Throwable {
+        String text = Integer.toString(num);
+        driver.findElement(By.id("numb")).sendKeys(text);
+    }
+
+    @Then("^I see a message: \"([^\"]*)\"$")
+    public void iSeeAMessage(String message) throws Throwable {
+        Alert alert = driver.switchTo().alert();
+        assertEquals(message, alert.getText());
     }
 }

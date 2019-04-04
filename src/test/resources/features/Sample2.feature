@@ -5,14 +5,26 @@ Feature: Introduction to cucumber part 2
   Background:
     Given I am on age page
 
+    @test
+  Scenario: scenario 4
+    Given  I open action page
+    And I enter number 5 in number field
+    And I click Result
+    Then I see text: "You entered number: "5""
+
   Scenario: a new scenario 1 with regex
     When I enter name: "Ann"
     And I enter age: 5
     And I click submit age
     Then I see message: "Hello, Ann, you are a kid"
 
+    @bug
   Scenario: a new scenario 2 with regex
     When I enter name: "Bob"
     And I enter age: 61
     And I click submit age
     Then I see message: "Hello, Bob, you are an adult"
+    
+  Scenario:  a new scenario 3
+    When I open locators page
+    Then I see 5 elements with class "test"

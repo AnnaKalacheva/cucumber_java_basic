@@ -7,5 +7,10 @@ Feature: Introduction to cucumber part 1
     Then I should see home page header
     And I should see home page description
     And I should see menu
+    And I should see a paragraph
+
+  Scenario: Style page
+    When I open styles page
+    Then correct header is seen
 
 
