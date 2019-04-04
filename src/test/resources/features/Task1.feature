@@ -16,7 +16,7 @@ Given I am on Enter a number page
     | number  | message                   |
     | 33      | Number is too small       |
     | 166     | Number is too big         |
-    | word    | Text instead of the number|
+    | word    | Please enter a number     |
 
 Scenario Outline: for correct number
 
