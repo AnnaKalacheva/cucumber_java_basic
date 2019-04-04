@@ -7,6 +7,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.Map;
@@ -82,8 +83,7 @@ public class SampleSteps {
 
     @And("^I should see menu$")
     public void iShouldSeeMenu() throws Throwable {
-        Thread.sleep(1000);
-        assertTrue(driver.findElement(By.cssSelector(".w3-navbar")).isDisplayed());
+        assertTrue(driver.findElement(By.className("w3-navbar")).isDisplayed());
     }
 
     @And("^I click the result checkbox button$")
@@ -109,36 +109,19 @@ public class SampleSteps {
     }
 
     @And("^I should see some text$")
-<<<<<<< Updated upstream
-    public void iShouldSeeSomeText() {
-=======
     public void iShouldSeeSomeText() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
->>>>>>> Stashed changes
         assertTrue(driver.findElement(By.tagName("p")).isDisplayed());
         System.out.println(driver.findElement(By.tagName("p")).getText());
     }
 
     @When("^I open styles page$")
-<<<<<<< Updated upstream
-    public void iOpenStylesPage() {
-=======
     public void iOpenStylesPage() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
->>>>>>> Stashed changes
         driver.get("https://kristinek.github.io/site/examples/styles");
     }
 
     @Then("^correct header is seen$")
-<<<<<<< Updated upstream
-    public void correctHeaderIsSeen() {
-        String actualText = driver.findElement(By.tagName("h1")).getText();
-        assertEquals("Lorem ipsum", actualText);
-    }
-
-    @Given("^I open action page$")
-    public void iOpenActionPage() {
-=======
     public void correctHeaderIsSeen() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         assertTrue(driver.findElement(By.className("w3-jumbo")).isDisplayed());
@@ -149,28 +132,10 @@ public class SampleSteps {
     @Given("^I open action page$")
     public void iOpenActionPage() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
->>>>>>> Stashed changes
         driver.get("https://kristinek.github.io/site/examples/actions");
     }
 
     @And("^I enter number (\\d+) in number field$")
-<<<<<<< Updated upstream
-    public void iEnterNumberInNumberField(String num) {
-        driver.findElement(By.id("number")).clear();
-        driver.findElement(By.id("number")).sendKeys(num);
-    }
-
-    @And("^I click Result$")
-    public void iClickResult() {
-        driver.findElement(By.id("result_button_number")).click();
-    }
-
-    @Then("^I see text: \"(.+)\"$")
-    public void iSeeText(String expectedText) throws Throwable {
-        String actualText = driver.findElement(By.id("result_number")).getText();
-        assertEquals(expectedText, actualText);
-    }
-=======
     public void iEnterNumberInNumberField(String arg0) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         driver.findElement(By.id("number")).clear();
@@ -201,5 +166,4 @@ public class SampleSteps {
     }
 
 
->>>>>>> Stashed changes
 }
