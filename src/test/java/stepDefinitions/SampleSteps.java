@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -100,4 +101,63 @@ public class SampleSteps {
     public void iAmOnActionPage() {
         driver.get("https://kristinek.github.io/site/examples/actions");
     }
+    @And("^I should see some text$")
+    public void iShouldSeeSomeText() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        assertTrue(driver.findElement(By.tagName("p")).isDisplayed());
+    }
+
+    @When("^I open styles page$")
+    public void iOpenStylesPage() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        driver.get("https://kristinek.github.io/site/examples/styles");
+    }
+
+    @Then("^Correct header is seen$")
+    public void correctHeaderIsSeen() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        assertEquals("Lorem ipsum",driver.findElement(By.xpath("//*[@class='w3-jumbo']")).getText());
+    }
+
+    @Given("^I open action page$")
+    public void iOpenActionPage() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        driver.get("https://kristinek.github.io/site/examples/actions");
+    }
+    @And("^I enter number: (\\d+) in number field$")
+    public void iEnterNumberInNumberField(int number) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        WebElement num = driver.findElement(By.id("number"));
+        num.clear();
+        num.sendKeys(String.valueOf(number));
+    }
+
+    @And("^I click Result$")
+    public void iClickResult() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+      driver.findElement(By.id("result_button_number")).click();
+    }
+
+
+    /*@Then("^I see text: \"([^\"]*)\"(\\d+)\"([^\"]*)\"$")
+    public void iSeeText(String message, int mes2, String mes3) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        assertEquals(message+"\""+mes2+"\""+mes3, driver.findElement(By.id("result_number")).getText());
+    }*/
+
+    @And("^I enter number <number> in number field$")
+    public void iEnterNumberNumberInNumberField(int number) throws Throwable {
+        WebElement num = driver.findElement(By.id("number"));
+        num.clear();
+        num.sendKeys(String.valueOf(number));
+
+    }
+
+    @Then("^I see text: \"(.*)\"$")
+    public void  iSeeText(String message)throws Throwable {
+        assertEquals(message, driver.findElement(By.id("result_number")).getText());
+
+    }
+
+
 }

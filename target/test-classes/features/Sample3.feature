@@ -10,6 +10,7 @@ Feature: Introduction to cucumber part 3
     And I enter age: <age>
     And I click submit age
     Then I see message: "<message>"
+
   @working
     Examples:
       | name  | age | message                        |
@@ -20,4 +21,17 @@ Feature: Introduction to cucumber part 3
     Examples:
       | name | age | message                   |
       | Tom  | 15  | Hello, Tom, you are a kid |
+
+  Scenario Outline: a individual tak3 scenario outline
+    Given  I open action page
+    And I enter number: <number> in number field
+    And I click Result
+    Then I see text: "You entered number: "<number>""
+
+    @Working
+    Examples:
+      | number  |
+      | 22  |
+      | 32  |
+
 
