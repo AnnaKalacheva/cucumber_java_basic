@@ -1,9 +1,11 @@
 package stepDefinitions;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,6 +18,7 @@ import static org.junit.Assert.assertTrue;
 
 public class SampleSteps {
     private WebDriver driver;
+
 
     public SampleSteps() {
         this.driver = Hooks.driver;
@@ -76,7 +79,8 @@ public class SampleSteps {
 
     @And("^I should see menu$")
     public void iShouldSeeMenu() throws Throwable {
-        assertTrue(driver.findElement(By.className("w3-navbar")).isDisplayed());
+        Thread.sleep(1000);
+        assertTrue(driver.findElement(By.cssSelector(".w3-navbar")).isDisplayed());
     }
 
     @And("^I click the result checkbox button$")
@@ -100,4 +104,127 @@ public class SampleSteps {
     public void iAmOnActionPage() {
         driver.get("https://kristinek.github.io/site/examples/actions");
     }
-}
+
+    @And("^I should see some text$")
+    public void iShouldSeeSomeText() throws Throwable {
+        assertTrue(driver.findElement(By.tagName("p")).isDisplayed());
+        // Write code here that turns the phrase above into concrete actions
+        System.out.println(driver.findElement(By.tagName("p")).getText());
+    }
+
+    @Given("^I open styles page$")
+    public void OpenStylesPage() throws Throwable {
+        driver.get("https://kristinek.github.io/site/examples/styles");
+    }
+
+    @Then("^correct header is seen$")
+    public void correctHeaderIsSeen() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        String actualText = driver.findElement(By.tagName("h1")).getText();
+        assertEquals("Lorem ipsum", actualText);
+    }
+
+    @Given("^I open action page$")
+    public void iOpenActionPage() throws Throwable {
+        driver.get("https://kristinek.github.io/site/examples/actions");
+    }
+    // Write code here that turns the phrase above into concrete actions
+
+
+    @And("^I enter number (\\d+) in number field$")
+    public void iEnterNumberInNumberField(int arg0) throws Throwable {
+        driver.findElement(By.id("number")).clear();
+        driver.findElement(By.id("number")).sendKeys("5");
+        // Write code here that turns the phrase above into concrete actions
+
+    }
+
+    @And("^I click Result$")
+    public void iClickResult() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        driver.findElement(By.id("result_button_number")).click();
+
+    }
+
+    @Then("^I see text: \"([^\"]*)\"(\\d+)\"([^\"]*)\"$")
+    public void iSeeText(String arg0, int arg1, String arg2) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        assertEquals("You entered number: \"5\"", driver.findElement(By.id("result_number")).getText());
+
+
+    }
+
+    @And("^I enter number <number> in number field$")
+    public void iEnterNumberNumberInNumberField() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+
+    @Then("^I see text: \"([^\"]*)\"<number>\"([^\"]*)\"$")
+    public void iSeeTextNumber(String arg0, String arg1) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @And("^I enter number <number> in number fieldx$")
+
+    public void iEnterNumberNumberInNumberFieldx(String num) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        driver.findElement(By.id("number")).sendKeys(num);
+
+
+        // @Then("^I see text: \"([^\"]*)\"(\\d+)\"([^\"]*)\"$")
+        //public void iSeeText(String expectedText) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        //    String actualText = driver.findElement(By.id("result_number")).getText();
+        //   assertEquals(expectedText, actualText);
+
+//}
+    }
+
+    @Given("^I am on Enter a number page$")
+    public void iAmOnAgePageToNumber() throws Throwable {
+        driver.get("https://kristinek.github.io/site/tasks/enter_a_number");
+    }
+
+    @When("^I enter number field : \"([^\"]*)\"$")
+    public void iShouldEnterNumberFieldNumber(String number) throws Throwable {
+        driver.findElement(By.cssSelector("#numb")).sendKeys(number);
+    }
+
+    @And("^I click Submit$")
+    public void iClickSubmit() throws Throwable {
+        driver.findElement(By.xpath("//button[@class='w3-btn w3-orange w3-margin']")).click();
+
+    }
+
+    @Then("^I should see message: \"([^\"]*)\"$")
+    public void TheniSeeMessage(String message) throws Throwable {
+        assertEquals(message, driver.findElement(By.cssSelector("#ch1_error")).getText());
+
+    }
+
+
+    @Then("^I should see answer message: \"([^\"]*)\"$")
+    public void iShouldSeeAnswerMessageNumberIsAnswer(String answer) throws Throwable {
+        Alert alert = (driver.switchTo().alert());
+        assertEquals(answer, alert.getText());
+    }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
