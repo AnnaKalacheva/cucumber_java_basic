@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -7,6 +8,7 @@ import cucumber.api.java.en.When;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.Map;
@@ -185,5 +187,87 @@ public class SampleSteps {
         Alert alert = driver.switchTo().alert();
         assertEquals(expectedText, alert.getText());
     }
+
+    @Given("^I am on pageObject$")
+    public void iOpenPageObject() {driver.get("https://kristinek.github.io/site/tasks/list_of_people_with_jobs.html");}
+
+    @When("^I click on addPersonButton$")
+    public void iClickAddPersonButton() {driver.findElement(By.id("addPersonBtn")).click();}
+
+    @And("^I enter name: (.+)$")
+    public void iEnterTheName(String name) {
+        driver.findElement(By.id("name")).clear();
+        driver.findElement(By.id("name")).sendKeys(name);
+    }
+
+    @And("^I enter job: (.+)$")
+    public void iEnterJob(String job){
+        driver.findElement(By.id("job")).clear();
+        driver.findElement(By.id("job")).sendKeys(job);
+    }
+
+    @And("^I click addButton$")
+    public void iClickAddButton(){driver.findElement(By.id("modal_button")).click();}
+
+    @Then("^I see theResult: (.*), (.*)$")
+    public void iSeeTheResult(String expectedName, String expectedJob){
+        //String actualName = driver.findElement(By.id("person3")).getText();
+        assertEquals(expectedName, driver.findElement(By.cssSelector("#person3 .name")).getText());
+
+        //String actualJob = driver.findElement(By.id("person3")).getText();
+        assertEquals(expectedJob, driver.findElement(By.cssSelector("#person3 .job")).getText());
+    }
+
+
+
+
+    @When("^I click edit button$")
+    public void iClickEditButton()  {
+        driver.findElement(By.xpath("//span[@onclick='openModalForEditPersonWithJob(0)']")).click();
+    }
+
+    @And("^I change name and job: (.*), (.*)$")
+    public void iChangeNameAndJob(String name, String job)  {
+        driver.findElement(By.id("name")).clear();
+        driver.findElement(By.id("name")).sendKeys(name);
+
+        driver.findElement(By.id("job")).clear();
+        driver.findElement(By.id("job")).sendKeys(job);
+    }
+
+    @And("^I click on edit button again$")
+    public void iClickOnEditButtonAgain()  {
+        driver.findElement(By.xpath("//button[@onclick='editPersonWithJob(0)']")).click();
+    }
+
+    @Then("^I see first person with name and job: (.*), (.*)$")
+    public void iSeeFirstPersonWithNameAndJob(String expectedName, String expectedJob)  {
+        assertEquals(expectedName, driver.findElement(By.cssSelector("#person0 .name")).getText());
+        assertEquals(expectedJob, driver.findElement(By.cssSelector("#person0 .job")).getText());
+    }
+
+
+    @When("^I click on deleting person button$")
+    public void iClickOnRemovePersonButton()  {
+        driver.findElement(By.xpath("//span[@onclick='deletePerson(0)']")).click();
+    }
+
+    @Then("^I do not see deleted person: (.+)$")
+    public void iDoNotSeeDeletedPerson(String person)  {
+        int elementsSize = driver.findElements(By.id(person)).size();
+        assertEquals(0, elementsSize);
+    }
+
+    @And("^I click clear all fields button$")
+    public void iClickClearAllFieldsButton()  {
+        driver.findElement(By.cssSelector("#addPersonBtn")).click();
+    }
+
+    @Then("^I see empty fields$")
+    public void iSeeEmptyFields() {
+        assertEquals("", driver.findElement(By.id("name")).getText());
+        assertEquals("", driver.findElement(By.id("job")).getText());
+    }
+
 
 }
