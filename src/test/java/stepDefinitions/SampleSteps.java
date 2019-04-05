@@ -169,4 +169,14 @@ public class SampleSteps {
         Alert alert = driver.switchTo().alert();
         assertTrue(alert.getText().equals(message));
     }
+
+    @When("^I enter:$")
+    public void iEnter(Map<String, String> values) throws Throwable {
+        for(Map.Entry<String, String> i : values.entrySet()){
+            driver.findElement(By.id(i.getKey())).clear();
+            driver.findElement(By.id(i.getKey())).sendKeys(i.getValue());
+            System.out.println("key: " + i.getKey());
+            System.out.println("value: " + i.getValue());
+        }
+    }
 }
