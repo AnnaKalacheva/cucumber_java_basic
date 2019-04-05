@@ -12,10 +12,10 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class PeopleWithJobs {
     private WebDriver driver;
@@ -92,6 +92,24 @@ public class PeopleWithJobs {
     public void checkThatPersonIsExists(String name) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         assertEquals(name, driver.findElement(By.xpath("//span[text()='" + name + "']")).getText());
+    }
+
+    //========= Remove person ==========
+
+    @When("^I click on remove person button with \"([^\"]*)\"$")
+    public void iClickOnRemovePersonButtonWith(String id) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        driver.findElement(By.xpath("//span[@onclick='deletePerson(" + id + ")']")).click();
+    }
+
+    @Then("^I can see that person with \"([^\"]*)\"disappeared$")
+    public void iCanSeeThatPersonWithDisappeared(String id) {
+        // Write code here that turns the phrase above into concrete actions
+        try {
+            driver.findElement(By.id("person" + id));
+        } catch (Exception e) {
+            assertTrue(e.getMessage().contains("Unable to locate element"));
+        }
     }
 }
 

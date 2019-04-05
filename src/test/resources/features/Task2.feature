@@ -24,3 +24,12 @@ Feature: Task two
     Then I click on save changes
     Then check that person "Donald" is exists
 
+
+  Scenario Outline: remove a person
+    Given I am on People with jobs page
+    When I click on remove person button with "<id>"
+    Then I can see that person with "<id>"disappeared
+    Examples:
+      | id |
+      | 0  |
+      | 1  |
