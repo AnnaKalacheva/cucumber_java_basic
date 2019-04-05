@@ -54,4 +54,14 @@ public class SamplePOSteps {
         agePage.enterName(valuesToEnter.get("name"));
         agePage.enterAge(valuesToEnter.get("age"));
     }
+
+    @When("^I enter <number> to number field$")
+    public void iEnterNumberToNumberField(int number) {
+        driver.findElement(By.id("numb")).sendKeys(String.valueOf(number));
+    }
+
+    @And("^I click Submit$")
+    public void iClickSubmit() {
+        driver.findElement(By.tagName("button")).click();
+    }
 }

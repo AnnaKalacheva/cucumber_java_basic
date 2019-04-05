@@ -1,6 +1,5 @@
 package stepDefinitions;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -169,5 +168,23 @@ public class SampleSteps {
     public void iSeeErrorMessage(String arg0) throws Throwable {
         WebElement errMessage = driver.findElement(By.id("ch1_error"));
         assertEquals(arg0, errMessage.getText());
+    }
+
+    @When("^I enter:$")
+    public void iEnter(List<String> values) {
+        String[] ids = {"name", "age"};
+        driver.findElement(By.id(ids[0])).clear();
+        driver.findElement(By.id(ids[0])).sendKeys(values.get(0));
+        driver.findElement(By.id(ids[1])).clear();
+        driver.findElement(By.id(ids[1])).sendKeys(values.get(1));
+
+
+        //
+
+        List<WebElement> inputs = driver.findElements(By.tagName("input"));
+        for (int i = 0; i < values.size(); i++) {
+            inputs.get(i).clear();
+            inputs.get(i).sendKeys(values.get(i));
+        }
     }
 }
