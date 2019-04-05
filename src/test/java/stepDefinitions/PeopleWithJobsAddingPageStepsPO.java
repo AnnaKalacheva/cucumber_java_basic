@@ -37,4 +37,8 @@ public class PeopleWithJobsAddingPageStepsPO {
         peopleWithJobsAddingPage.clickAddButton();
     }
 
+    @Then("^I click Clear all button and I see all lines are empty$")
+    public void iClickClearAllButtonAndISeeAllLinesAreEmpty() throws Throwable {
+        peopleWithJobsAddingPage.checkClickClearAllButton();
+    }
 }

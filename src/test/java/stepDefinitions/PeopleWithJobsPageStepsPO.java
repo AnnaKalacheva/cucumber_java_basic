@@ -43,4 +43,24 @@ public class PeopleWithJobsPageStepsPO {
     public void iClickEditButton() {
         peopleWithJobsPage.clickEditButtonFirstPerson();
     }
+
+    @Then("^I am on People with Jobs page I see person info is edited$")
+    public void iAmOnPeopleWithJobsPageISeePersonInfoIsEdited() throws Throwable {
+        peopleWithJobsPage.checkFirstPersonInfoEdited();
+    }
+
+    @When("^I click delete Person button$")
+    public void iClickDeletePersonButton() throws Throwable {
+        peopleWithJobsPage.ClickDeletePersonButton();
+    }
+
+    @Then("^I see person is removed$")
+    public void iSeePersonIsRemoved() throws Throwable {
+        peopleWithJobsPage.isPersonIsRemoved();
+    }
+
+    @Then("^I click Reset button and I see original list$")
+    public void iClickResetButtonAndISeeOriginalList() throws Throwable {
+        peopleWithJobsPage.clickResetButton();
+    }
 }
