@@ -190,13 +190,12 @@ public class SampleSteps {
 
     @When("^I enter number field : \"([^\"]*)\"$")
     public void iShouldEnterNumberFieldNumber(String number) throws Throwable {
-        driver.findElement(By.cssSelector("#numb")).sendKeys(number);
+        driver.findElement(By.id("numb")).sendKeys(number);
     }
 
     @And("^I click Submit$")
     public void iClickSubmit() throws Throwable {
         driver.findElement(By.xpath("//button[@class='w3-btn w3-orange w3-margin']")).click();
-
     }
 
     @Then("^I should see message: \"([^\"]*)\"$")

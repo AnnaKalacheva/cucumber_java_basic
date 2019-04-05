@@ -11,10 +11,11 @@ Feature: Task one
     Then I should see message: "<message>"
 
     Examples:
-      | number | message               |
-      | 20     | Number is too small   |
-      | 110    | Number is too big     |
-      | Anna   | Please enter a number |
+      | number | message                      |
+      |        | You haven't entered anything |
+      | 20     | Number is too small          |
+      | 110    | Number is too big            |
+      | Anna   | Please enter a number        |
 
   Scenario Outline: correct numbers
     When I enter number field : "<number>"
@@ -24,6 +25,8 @@ Feature: Task one
     Examples:
       | number | message |
       | 81     | 9.00    |
+      | 55     | 7.42    |
+
 
 
 
