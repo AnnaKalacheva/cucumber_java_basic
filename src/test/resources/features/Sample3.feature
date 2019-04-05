@@ -36,5 +36,14 @@ Scenario Outline:  A neeeeew scenario outline
     | 8       |
     | 12      |
 
+@newTestAnnIsAKid
+  Scenario: Ann
+  Given I am on age page
+  When I enter:
+    |name| Ann |
+    |age | 5   |
+  And I click submit age
+  Then I see message: "Hello, Ann, you are a kid"
+
 
 

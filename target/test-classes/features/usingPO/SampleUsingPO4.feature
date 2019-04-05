@@ -20,6 +20,7 @@ Feature: Introduction to cucumber part 4
     And I click submit age using PO
     Then I see message: "Hello, Bob, you are an adult" using PO
 
+
   @debug
   Scenario Outline: a new scenario outline 2
     When I enter values using PO:

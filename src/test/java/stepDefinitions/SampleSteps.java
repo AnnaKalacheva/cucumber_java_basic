@@ -43,7 +43,7 @@ public class SampleSteps {
     @When("^I enter name: \"([^\"]*)\"$")   //var arī raksīt      ("^       (.*)$")
     public void iEnterName(String name) throws Throwable {   //svarīgi iemest string name
         driver.findElement(By.id("name")).clear();
-        driver.findElement(By.id("name")).sendKeys(name);
+        driver.findElement(By.id("name")).sendKeys(name);     //svarīg iekavās (name), jo pirms tam bija arī String(name)
     }
 
 
