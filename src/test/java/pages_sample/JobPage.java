@@ -64,7 +64,7 @@ public class JobPage {
         assertEquals(title, addedJobTitle.getText());
     }
 
-    //////////////////////////////////////////////////////////////////////////////
+
     public void clickEditPerson() {
         buttonEditOnFirstPage.click();
     }
@@ -80,19 +80,7 @@ public class JobPage {
         yourJobTitle.sendKeys(jobTitle);
     }
 
-   /* public void pressEditAfterChanger() {
-        buttonEditOnSecondPage.click();
-    }
 
-    public void checkEditChangesForName(String name) {
-        assertEquals(name, nameThatIsEdited.getText());
-    }
-
-    public void checkEditChangesForJob(String title) {
-        assertEquals(title, jobThatIsEdited.getText());
-    }*/
-
-    ////////////////////////////////////////
     public void removePerson() {
         buttonRemove.click();
     }
