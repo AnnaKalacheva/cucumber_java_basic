@@ -14,6 +14,10 @@ Feature: Task 1
       | 101    | Number is too big            |
       | word   | Please enter a number        |
       |        | You haven't entered anything |
+  @bug
+    Examples:
+      | number | message             |
+      | 49     | Number is too small |
 
   Scenario Outline: Enter a valid number
     When I enter number: <number>
@@ -24,10 +28,6 @@ Feature: Task 1
       | number | answer |
       | 64     | 8.00   |
       | 70     | 8.37   |
-    @bug
-    Examples:
-      | number | answer |
-      | 49     | 7.00   |
 
   @easterEgg
   Scenario: Enter 42

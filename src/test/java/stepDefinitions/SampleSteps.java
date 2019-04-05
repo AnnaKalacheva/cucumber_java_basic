@@ -6,6 +6,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.Map;
@@ -70,6 +71,15 @@ public class SampleSteps {
             driver.findElement(By.id(e.getKey())).sendKeys(e.getValue());
             System.out.println("key is " + e.getKey());
             System.out.println("value is " + e.getValue());
+        }
+    }
+
+    @When("^I enter:$")
+    public void iEnter(List<String> values) throws Throwable {
+        List<WebElement> inputs = driver.findElements(By.tagName("input"));
+        for (int i = 0; i < values.size(); i++) {
+            inputs.get(i).clear();
+            inputs.get(i).sendKeys(values.get(i));
         }
     }
 
