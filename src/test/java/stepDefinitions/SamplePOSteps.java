@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import pages_sample.*;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
