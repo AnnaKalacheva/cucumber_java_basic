@@ -165,5 +165,21 @@ public class SampleSteps {
         driver.findElement(By.id("number")).sendKeys(num);
     }
 
+    @When("^I enter:$")
+    public void iEnter(List<String> values) throws Throwable {
+        driver.findElement(By.cssSelector("#name")).clear();
+        driver.findElement(By.cssSelector("#name")).sendKeys(values.get(0));
+        driver.findElement(By.cssSelector("[value='")).clear();
+        driver.findElement(By.cssSelector("[value='")).sendKeys(values.get(1));
+    }
 
+
+//    @When("^I enter:$")
+//    public void iEnter(List<String> values) throws Throwable {
+//        List<WebElement> inputs = driver.findElements(By.tagName("input"));
+//        for (int i = 0; i < values.size(); i++) {
+//            inputs.get(i).clear();
+//            inputs.get(i).sendKeys(values.get(i));
+//        }
 }
+

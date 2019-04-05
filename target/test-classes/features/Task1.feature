@@ -18,11 +18,20 @@ Feature: individual task create 1 scenario outline and 1 scenario for page with 
       | Kate   | Please enter a number        |
       |        | You haven't entered anything |
 
+  @bug
+    Examples:
+      | number | message             |
+      | -55    | Number is too small |
+      | 49     | Number is too small |
+
   @test2
   Scenario: for correct numbers
     When I enter: "64"
     And I click submit
-    Then I see alert with result: "Square root of 64 is 8.00"
+    Then I see alert with message: "Square root of 64 is 8.00"
+
+
+
 
 
 
