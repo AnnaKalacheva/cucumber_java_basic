@@ -7,5 +7,6 @@ Feature: Introduction to cucumber part 1
     Then I should see home page header
     And I should see home page description
     And I should see menu
+    And I should see some text
 
 
