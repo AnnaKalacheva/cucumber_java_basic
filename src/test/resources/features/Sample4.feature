@@ -6,7 +6,7 @@ Feature: Introduction to cucumber part 4
   Background:
     Given I am on age page
 
-  Scenario: a new scenario with 1-row table
+  Scenario: a new scenario with 2-row table
     Given I am on action page
     When I clicked on checkboxes:
       | Option 1 |

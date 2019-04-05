@@ -64,7 +64,7 @@ public class SampleSteps {
 
     @Then("^I see message: \"([^\"]*)\"$")
     public void iSeeMessage(String message) throws Throwable {
-        assertEquals(message, driver.findElement(By.id("ch1_error")).getText());
+        assertEquals(message, driver.findElement(By.id("message")).getText());
     }
 
     @When("^I enter values:$")
@@ -91,6 +91,7 @@ public class SampleSteps {
     @When("^I clicked on checkboxes:$")
     public void iClickedOnCheckboxes(List<String> values) throws Throwable {
         for (String value : values) {
+
             driver.findElement(By.cssSelector("[value='" + value + "']")).click();
         }
     }
@@ -225,5 +226,18 @@ public class SampleSteps {
 
         String result = String.format("%.2f", Math.sqrt(number));
         assertEquals("Square root of " + number + " is " + result, alert.getText());
+    }
+
+    @When("^I enter :$")
+    public void iEnter(List<String> values) throws Throwable {
+      List<WebElement> inputs = driver.findElements(By.tagName("input"));
+        for (int i = 0; i < values.size(); i++) {
+            inputs.get(i).clear();
+            inputs.get(i).sendKeys(values.get(i));
+
+        }
+
+
+
     }
 }

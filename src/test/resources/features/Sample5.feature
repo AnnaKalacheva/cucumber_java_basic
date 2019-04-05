@@ -31,3 +31,11 @@ Feature: Introduction to cucumber part 4
       | Ann  | 5   | Hello, Ann, you are a kid    |
       | Bob  | 61  | Hello, Bob, you are an adult |
 
+
+  Scenario: a new scenario outline 3
+    Given I am on age page
+    When I enter :
+      | Ann |
+      | 5   |
+    And I click submit age
+    Then I see message: "Hello, Ann, you are a kid"
