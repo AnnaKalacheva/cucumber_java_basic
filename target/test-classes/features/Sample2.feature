@@ -5,7 +5,7 @@ Feature: Introduction to cucumber part 2
   Background:
     Given I am on age page
 
-  @test
+
   Scenario: a new scenario 1 with regex
     When I enter name: "Ann"
     And I enter age: 5
@@ -18,7 +18,7 @@ Feature: Introduction to cucumber part 2
     And I click submit age
     Then I see message: "Hello, Bob, you are an adult"
 
-  @test
+
   Scenario: a new scenario 3 with regex
     Given  I open action page
     And I enter number 5 in number field

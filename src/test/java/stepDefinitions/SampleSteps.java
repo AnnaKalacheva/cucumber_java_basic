@@ -147,14 +147,9 @@ public class SampleSteps {
     }
 
 
-
-
-
-
-
     @Given("^I am on Enter a number page$")
     public void iAmOnEnterANumberPage() {
-            driver.get("https://kristinek.github.io/site/tasks/enter_a_number");
+        driver.get("https://kristinek.github.io/site/tasks/enter_a_number");
     }
 
     /*@When("^I enter number: \"([^\"]*)\"$")
@@ -191,5 +186,15 @@ public class SampleSteps {
     public void iSeeAlertWithText(String arg0) {
         Alert alert = driver.switchTo().alert();
         assertEquals("Square root of 64 is 8.00", alert.getText());
+    }
+
+
+    @When("^I enter:$")
+    public void iEnter(List<String> values){
+        List<WebElement> inputs = driver.findElements(By.tagName("input"));
+            for (int i = 0; i<values.size(); i++){
+                inputs.get(i).clear();
+                inputs.get(i).sendKeys(values.get(i));
+            }
     }
 }
