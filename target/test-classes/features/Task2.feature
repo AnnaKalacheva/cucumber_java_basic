@@ -24,3 +24,29 @@ Feature: Task two
     Then I click on save changes
     Then check that person "Donald" is exists
 
+
+  Scenario Outline: remove a person
+    Given I am on People with jobs page
+    When I click on remove person button with "<id>"
+    Then I can see that person with "<id>"disappeared
+    Examples:
+      | id |
+      | 0  |
+      | 1  |
+
+
+  Scenario Outline: reset original list after: adding a person
+    Given I am on People with jobs page
+    When I click on Add person button
+    Then I enter person name: "David"
+    Then I enter job: "engineer"
+    Then I click on Add button
+    Then check that person "David" is exists
+    Then I click on reset list button
+    Then check that person with "<name>" and "<job>" is exists
+
+    Examples:
+      | name | job          |
+      | Mike | Web Designer |
+      | Jill | Support      |
+      | Jane | Accountant   |

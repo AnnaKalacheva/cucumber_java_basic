@@ -111,5 +111,11 @@ public class PeopleWithJobs {
             assertTrue(e.getMessage().contains("Unable to locate element"));
         }
     }
+    //========= Reset person ==========
+
+    @Then("^I click on reset list button$")
+    public void iClickOnResetListButton() {
+        driver.findElement(By.xpath("//button[@onclick='resetListOfPeople()']")).click();
+    }
 }
 
