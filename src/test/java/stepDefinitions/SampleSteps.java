@@ -67,7 +67,8 @@ public class SampleSteps {
     public void iSeeMessage(String message) throws Throwable {
         assertEquals(message, driver.findElement(By.id("message")).getText());
     }
-//it shows value or values
+
+    //it shows value or values
     @When("^I enter values:$")
     public void iEnterValues(Map<String, String> valuesToEnter) throws Throwable {
         for (Map.Entry<String, String> e : valuesToEnter.entrySet()) {
@@ -107,7 +108,7 @@ public class SampleSteps {
 
     @And("^I should see some text$")
     public void iShouldSeeSomeText() {
-       assertTrue(driver.findElement(By.tagName("p")).isDisplayed());
+        assertTrue(driver.findElement(By.tagName("p")).isDisplayed());
         System.out.println(driver.findElement(By.tagName("p")).getText());
 
     }
@@ -115,17 +116,17 @@ public class SampleSteps {
     @When("^I open styles page$")
     public void iOpenStylesPage() throws Throwable {
         driver.get("https://kristinek.github.io/site/examples/styles");
-            }
+    }
 
     @Then("^correct header is seen$")
     public void correctHeaderIsSeen() throws Throwable {
-         assertEquals("Lorem ipsum", driver.findElement(By.className("w3-jumbo")).getText());
+        assertEquals("Lorem ipsum", driver.findElement(By.className("w3-jumbo")).getText());
 
     }
 
     @Given("^I open action page$")
     public void iOpenActionPage() throws Throwable {
-         driver.get("https://kristinek.github.io/site/examples/actions");
+        driver.get("https://kristinek.github.io/site/examples/actions");
     }
 
 
@@ -133,7 +134,7 @@ public class SampleSteps {
     public void iEnterNumber(int number) throws Throwable {
         driver.findElement(By.name("vfb-9")).clear();
         driver.findElement(By.name("vfb-9")).sendKeys(String.valueOf(number));
-                  }
+    }
 
     @And("^I click Result$")
     public void iClickResult() throws Throwable {
@@ -144,9 +145,9 @@ public class SampleSteps {
     public void iSeeTextYouEnteredNumber(String text) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         assertEquals("You entered number: \"5\"", driver.findElement(By.id("result_number")).getText());
-            }
+    }
 
-///IT IS FOR TASK1
+    ///IT IS FOR TASK1
     @Given("^I am on number page$")
     public void iAmOnNumberPage() throws Throwable {
         driver.get("https://kristinek.github.io/site/tasks/enter_a_number");
@@ -177,6 +178,17 @@ public class SampleSteps {
     @Then("^I see alert:\"([^\"]*)\"$")
     public void iSeeAlert(String oneAalert) throws Throwable {
         Alert alert = driver.switchTo().alert();
-        assertEquals(oneAalert,alert.getText());
+        assertEquals(oneAalert, alert.getText());
+    }
+
+    @When("^I enter:$")
+    public void iEnterNameAge(List<String> values) throws Throwable {
+        for (String value : values) {
+            driver.findElement(By.xpath(("//*[@id='name']"))).clear();
+            driver.findElement(By.xpath(("//*[@id='name']"))).sendKeys(values.get(0));
+
+            driver.findElement(By.xpath(("//*[@id='age']"))).clear();
+            driver.findElement(By.xpath(("//*[@id='age']"))).sendKeys(values.get(1));
+        }
     }
 }

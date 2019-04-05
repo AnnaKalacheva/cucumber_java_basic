@@ -14,6 +14,7 @@ Feature: First Individual task in cucumber
     Examples:
       | number | message              |
       | 1      | Number is too small  |
+      | 11     | Number is too small  |
 
   @negative2
     Scenario Outline: a negative scenario outline2
@@ -35,7 +36,8 @@ Feature: First Individual task in cucumber
   @negativeExemple3
     Examples:
       | number | message                  |
-      | 101    | Number is too big    |
+      | 101    | Number is too big        |
+      | 299    | Number is too big        |
 
 
   @positivescenario
@@ -47,3 +49,5 @@ Scenario Outline: a positive scenario
     Examples:
       | number | alert                        |
       | 56     | Square root of 56 is 7.48    |
+      | 88     | Square root of 88 is 9.38    |
+

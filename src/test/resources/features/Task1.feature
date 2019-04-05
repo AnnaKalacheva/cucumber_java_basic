@@ -14,7 +14,7 @@ Feature: First Individual task in cucumber
     Examples:
       | number | message              |
       | 1      | Number is too small  |
-      | 11     | Number is too small |
+      | 11     | Number is too small  |
 
   @negative2
     Scenario Outline: a negative scenario outline2
