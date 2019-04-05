@@ -16,8 +16,21 @@ Feature: Introduction to cucumber part 3
       | Ann   | 5   | Hello, Ann, you are a kid      |
       | Marry | 50  | Hello, Marry, you are an adult |
       | Bob   | 61  | Hello, Bob, you are an adult   |
+
   @not_working
     Examples:
       | name | age | message                   |
       | Tom  | 15  | Hello, Tom, you are a kid |
+
+@tryExemples
+Scenario Outline: a new scenario outline2
+    Given  I open action page
+    And I enter something: <number>
+    And I click Result
+    Then I see Text: You entered number: "<text>"
+
+    Examples:
+   | number  |text|
+   | 5       | 5  |
+   | 6       | 6  |
 
