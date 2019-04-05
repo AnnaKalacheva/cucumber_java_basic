@@ -101,6 +101,7 @@ public class SampleSteps {
     public void iAmOnActionPage() {
         driver.get("https://kristinek.github.io/site/examples/actions");
     }
+
     @And("^I should see some text$")
     public void iShouldSeeSomeText() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
@@ -116,7 +117,7 @@ public class SampleSteps {
     @Then("^Correct header is seen$")
     public void correctHeaderIsSeen() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        assertEquals("Lorem ipsum",driver.findElement(By.xpath("//*[@class='w3-jumbo']")).getText());
+        assertEquals("Lorem ipsum", driver.findElement(By.xpath("//*[@class='w3-jumbo']")).getText());
     }
 
     @Given("^I open action page$")
@@ -124,6 +125,7 @@ public class SampleSteps {
         // Write code here that turns the phrase above into concrete actions
         driver.get("https://kristinek.github.io/site/examples/actions");
     }
+
     @And("^I enter number: (\\d+) in number field$")
     public void iEnterNumberInNumberField(int number) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
@@ -135,7 +137,7 @@ public class SampleSteps {
     @And("^I click Result$")
     public void iClickResult() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-      driver.findElement(By.id("result_button_number")).click();
+        driver.findElement(By.id("result_button_number")).click();
     }
 
 
@@ -154,10 +156,16 @@ public class SampleSteps {
     }
 
     @Then("^I see text: \"(.*)\"$")
-    public void  iSeeText(String message)throws Throwable {
+    public void iSeeText(String message) throws Throwable {
         assertEquals(message, driver.findElement(By.id("result_number")).getText());
 
     }
 
 
+    @When("^I enter:$")
+    public void iEnter(List<String> values) throws Throwable {
+        driver.findElement(By.id("name")).clear();
+        driver.findElement(By.id("name")).sendKeys(values.get(0));
+        driver.findElement(By.id("age")).sendKeys(values.get(1));
+    }
 }

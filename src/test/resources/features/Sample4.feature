@@ -20,4 +20,12 @@ Feature: Introduction to cucumber part 4
       | Option 2 |
     And I click the result checkbox button
     Then message for checkboxes "You selected value(s): Option 2" is seen
+@Age
+  Scenario: a new scenario with 1-row table
+    Given I am on age page
+    When I enter:
+      | Ann |
+      | 5 |
+    And I click submit age
+    Then I see message: "Hello, Ann, you are a kid"
 

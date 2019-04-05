@@ -3,7 +3,7 @@ Feature: Individual Task1 scenario
   Background:
     Given I am on enter a number page
 
-    @Scenario
+    @Scenario1
     Scenario Outline: Individual Task1 scenario1
     When I enter number: <number>
     And  I click submit number
@@ -41,7 +41,7 @@ Feature: Individual Task1 scenario
     When I enter number: <number>
     And  I click submit number
     Then I see result in alert message: "Square root of 60 is 7.75"
-  @bignumber
+  @number
     Examples:
       | number  |
       | 60  |
