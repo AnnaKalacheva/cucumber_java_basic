@@ -8,7 +8,7 @@ Feature: Task two
     And I enter person name: "<name>"
     And I enter job: "<job>"
     Then I click on Add button
-    Then check that person with "<name>" and "<job>" is exists
+    Then check that person with "<name>" and "<job>" exists
 
     Examples:
       | name           | job    |
@@ -28,7 +28,7 @@ Feature: Task two
   Scenario Outline: remove a person
     Given I am on People with jobs page
     When I click on remove person button with "<id>"
-    Then I can see that person with "<id>"disappeared
+    Then I can see that person with "<id>" disappeared
     Examples:
       | id |
       | 0  |
@@ -43,10 +43,49 @@ Feature: Task two
     Then I click on Add button
     Then check that person "David" is exists
     Then I click on reset list button
-    Then check that person with "<name>" and "<job>" is exists
+    Then check that person with "<name>" and "<job>" exists
 
     Examples:
       | name | job          |
       | Mike | Web Designer |
       | Jill | Support      |
       | Jane | Accountant   |
+
+
+  Scenario Outline: reset original list after: editing a person
+    Given I am on People with jobs page
+    When I click on edit person button
+    And I can edit name: "Donald"
+    And I can edit job: "president"
+    Then I click on save changes
+    Then check that person "Donald" is exists
+    Then I click on reset list button
+    Then check that person with "<name>" and "<job>" exists
+
+    Examples:
+      | name | job          |
+      | Mike | Web Designer |
+      | Jill | Support      |
+      | Jane | Accountant   |
+
+  Scenario Outline: reset original list after: removing a person
+    Given I am on People with jobs page
+    When I click on remove person button with "<id>"
+    Then I can see that person with "<id>" disappeared
+    Then I click on reset list button
+    Then check that person with "<name>" and "<job>" exists
+
+    Examples:
+      | name | job          | id |
+      | Mike | Web Designer | 0  |
+      | Jill | Support      | 1  |
+      | Jane | Accountant   | 2  |
+
+
+  Scenario: check that clear button on adding a user works correctly
+    Given I am on People with jobs page
+    When I click on Add person button
+    Then I enter person name: "David"
+    Then I enter job: "engineer"
+    And I click on clear all fields
+    Then I check all fields are cleared

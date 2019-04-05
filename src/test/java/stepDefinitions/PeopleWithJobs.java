@@ -1,21 +1,14 @@
 package stepDefinitions;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class PeopleWithJobs {
     private WebDriver driver;
@@ -54,8 +47,8 @@ public class PeopleWithJobs {
         driver.findElement(By.id("modal_button")).click();
     }
 
-    @Then("^check that person with \"([^\"]*)\" and \"([^\"]*)\" is exists$")
-    public void checkThatPersonWithAndIsExists(String name, String job) throws Throwable {
+    @Then("^check that person with \"([^\"]*)\" and \"([^\"]*)\" exists$")
+    public void checkThatPersonWithAndExists(String name, String job) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         assertEquals(name, driver.findElement(By.xpath("//span[text()='" + name + "']")).getText());
         assertEquals(job, driver.findElement(By.xpath("//span[text()='" + job + "']")).getText());
@@ -102,7 +95,7 @@ public class PeopleWithJobs {
         driver.findElement(By.xpath("//span[@onclick='deletePerson(" + id + ")']")).click();
     }
 
-    @Then("^I can see that person with \"([^\"]*)\"disappeared$")
+    @Then("^I can see that person with \"([^\"]*)\" disappeared$")
     public void iCanSeeThatPersonWithDisappeared(String id) {
         // Write code here that turns the phrase above into concrete actions
         try {
@@ -117,5 +110,18 @@ public class PeopleWithJobs {
     public void iClickOnResetListButton() {
         driver.findElement(By.xpath("//button[@onclick='resetListOfPeople()']")).click();
     }
+
+    @Then("^I click on clear all fields$")
+    public void iClickOnClearAllFields() {
+        driver.findElement(By.xpath("//button[@onclick='openModalForAddPersonWithJob()']")).click();
+    }
+
+
+    @Then("^I check all fields are cleared$")
+    public void iCheckAllFieldsAreCleared() {
+        assertEquals("", driver.findElement(By.id("name")).getText());
+        assertEquals("", driver.findElement(By.id("job")).getText());
+    }
 }
+
 
