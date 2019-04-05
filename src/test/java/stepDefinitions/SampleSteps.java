@@ -212,7 +212,7 @@ public class SampleSteps {
         assertEquals(answer, alert.getText());
     }
 
-    }
+}
 
 
 
