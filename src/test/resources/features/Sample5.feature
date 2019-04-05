@@ -31,3 +31,13 @@ Feature: Introduction to cucumber part 4
       | Ann  | 5   | Hello, Ann, you are a kid    |
       | Bob  | 61  | Hello, Bob, you are an adult |
 
+  Scenario Outline: : sdfasgdf
+    When I enter:
+      | name |  <name> |
+      | age  |  <age>  |
+    And I click submit age
+    Then I see message: "<message>"
+    Examples:
+      | name | age | message                        |
+      | Ann  | 5   | Hello, Ann, you are a kid      |
+      | Bob  | 15  | Hello, Bob, you are a teenager |
