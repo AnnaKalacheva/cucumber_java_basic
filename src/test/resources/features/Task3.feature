@@ -36,6 +36,12 @@ Feature: Introduction to Test 3
     Then I click on the back button
     Then I returned to the age page
 
+  Scenario: Check that you cannot enter a literal value in the age field
+    Given I am on the age page
+    When I fill the name field: "Sara"
+    Then I enter age: "Sara"
+    Then I click on the submit button
+    Then I can see the message "You haven't entered anything in age field"
 
 
 

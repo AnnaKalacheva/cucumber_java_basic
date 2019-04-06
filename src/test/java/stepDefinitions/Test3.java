@@ -27,6 +27,7 @@ public class Test3 {
 
     @When("^I enter age: \"([^\"]*)\"$")
     public void iEnterAge(String age) throws Throwable {
+        driver.findElement(By.id("age")).click();
         driver.findElement(By.id("age")).sendKeys(String.valueOf(age));
     }
 
@@ -45,6 +46,7 @@ public class Test3 {
 
     @When("^I fill the name field: \"([^\"]*)\"$")
     public void iFillTheNameField(String name) throws Throwable {
+        driver.findElement(By.id("name")).click();
         driver.findElement(By.id("name")).sendKeys(String.valueOf(name));
     }
 
