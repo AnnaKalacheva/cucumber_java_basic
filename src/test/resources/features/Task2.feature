@@ -67,17 +67,3 @@ Feature: Task2 Test scenarios for List of people PO (P2)
       | name     | surname     | job     | dob        |
       | TestName | TestSurname | TestJob | 01/04/2000 |
 
-
-
-
-#  Scenario Outline: a new scenario outline 2
-#    When I enter values using PO:
-#      | name | <name> |
-#      | age  | <age>  |
-#    And I click submit age using PO
-#    Then I see message: "<message>" using PO
-#    Examples:
-#      | name | age | message                      |
-#      | Ann  | 5   | Hello, Ann, you are a kid    |
-#      | Bob  | 61  | Hello, Bob, you are an adult |
-
