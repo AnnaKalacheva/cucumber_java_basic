@@ -25,7 +25,7 @@ public class PeopleWithJobs_NewPerson {
     private List<WebElement> languageSelect;
     @FindBy(how = How.XPATH, using = "//input[@name='gender']")
     private List<WebElement> genderSelect;
-    @FindBy(how = How.XPATH, using = "//select[@id='status']") //????????????
+    @FindBy(how = How.XPATH, using = "//select[@id='status']")
     private WebElement employeeStatus;
 
 
@@ -67,8 +67,8 @@ public class PeopleWithJobs_NewPerson {
         assertTrue(languageSelect.get(0).isSelected());
         assertFalse(languageSelect.get(1).isSelected());
         assertFalse(languageSelect.get(2).isSelected());
-        for (int i = 0; i < 3; i++) {
-            assertFalse(genderSelect.get(i).isSelected());
+        for (WebElement webElement : genderSelect) {
+            assertFalse(webElement.isSelected());
         }
         checkDefaultEmployeeStatusSelected();
     }
@@ -118,7 +118,7 @@ public class PeopleWithJobs_NewPerson {
 
     public void selectEmployeeStatus(String status) {
         Select dropdown = new Select(employeeStatus);
-        switch(status) {
+        switch (status) {
             case "Intern":
                 dropdown.selectByValue("intern");
                 break;

@@ -1,11 +1,9 @@
 package stepDefinitions;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.lexer.Th;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -28,53 +26,50 @@ public class PeopleWithJobsPOSteps {
     }
 
     @Given("^I am on People with jobs page$")
-    public void iAmOnPage() throws Throwable {
+    public void iAmOnPage() {
         driver.get(peopleWjobs.peopleWithJobsUrl());
     }
 
     @When("^I click Add person button:$")
-    public void iClickAddPersonButton() throws Throwable {
+    public void iClickAddPersonButton() {
         peopleWjobs.clickAddPerson();
     }
 
     @Then("^I'm redirected to a new person registration page$")
-    public void iMRedirectedToANewPersonRegistrationPage() throws Throwable {
+    public void iMRedirectedToANewPersonRegistrationPage() {
         driver.get(peopleWjobs_NewPerson.newPersonPageUrl());
     }
 
     @And("^I fill all fields$")
-    public void iFillAllFields() throws Throwable {
+    public void iFillAllFields() {
 
-    }
-
-    @And("^I enter values$")
-    public void iEnterValues() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
     }
 
     @And("^I enter values in fields:$")
-    public void iEnterValuesInFields(Map<String, String> valuesToEnter) throws Throwable {
-        peopleWjobs_NewPerson.enterName(valuesToEnter.get("Name"));
-        peopleWjobs_NewPerson.enterSurname(valuesToEnter.get("Surname"));
-        peopleWjobs_NewPerson.enterJob(valuesToEnter.get("Job"));
-        peopleWjobs_NewPerson.enterDateOfBirth(valuesToEnter.get("Date of birth"));
+    public void iEnterValuesInFields(Map<String, String> valuesToEnter) throws Throwable{
+        for(Map.Entry<String, String> value : valuesToEnter.entrySet()) {
+            driver.findElement(By.id(value.getKey())).clear();
+            driver.findElement(By.id(value.getKey())).sendKeys(value.getValue());
+
+        }
+        driver.findElement(By.tagName("body")).click();
+        Thread.sleep(1000);
     }
 
     @And("^I click on language checkboxes:$")
-    public void iSelectLanguage(List<String> languageList) throws Throwable {
+    public void iSelectLanguage(List<String> languageList) {
         for (String languageValue : languageList) {
             driver.findElement(By.id(languageValue.toLowerCase())).click();
         }
     }
 
     @And("^I click on gender: (.*)$")
-    public void iChooseGender(String gender) throws Throwable {
+    public void iChooseGender(String gender) {
         peopleWjobs_NewPerson.selectGender(gender);
     }
 
     @And("^I select Employee status: (.*)$")
-    public void iSelectEmployeeStatus(String employeeStatus) throws Throwable {
+    public void iSelectEmployeeStatus(String employeeStatus) {
         peopleWjobs_NewPerson.selectEmployeeStatus(employeeStatus);
     }
 
@@ -83,9 +78,13 @@ public class PeopleWithJobsPOSteps {
         peopleWjobs_NewPerson.clickAdd();
     }
 
-    @When("^I click pencil to edit person for person: (.*)$")
-    public void iClickPencilEditPersonForJillWatson(String id) throws Throwable {
-            driver.findElement(By.xpath("//span[@onclick='openModalForEditPerson(" + id + ")']")).click();
+    @When("^I click pencil to edit person: (.*)$")
+    public void iClickPencilEditPersonForJillWatson(String personNameSurname) {
+        for (int index = 0; index < peopleWjobs.personsList().size(); index++) {
+            if (peopleWjobs.personsList().get(index).equals(personNameSurname)) {
+                driver.findElement(By.xpath("//span[@onclick='openModalForEditPerson(" + index + ")']")).click();
+            }
+        }
     }
 
     @And("^I enter a new date of birth: (.*)$")
@@ -94,12 +93,38 @@ public class PeopleWithJobsPOSteps {
     }
 
     @Then("^I click Edit button$")
-    public void iClickEditButton() throws Throwable {
+    public void iClickEditButton() throws Throwable{
         driver.findElement(By.xpath("//button[text()='Edit']")).click();
     }
 
-    @When("^I click cross to remove person: (\\d+)$")
-    public void iClickCrossToRemovePerson(int id) throws Throwable {
-        driver.findElement(By.xpath("//span[@onclick='deletePerson(" + id + ")']")).click();
+    @When("^I click cross to remove person: (.*)$")
+    public void iClickCrossToRemovePerson(String personNameSurname) throws Throwable {
+        System.out.println("\nAmount of persons before deletion: " + peopleWjobs.personsList().size());
+        for (int index = 0; index < peopleWjobs.personsList().size(); index++) {
+            if (peopleWjobs.personsList().get(index).equals(personNameSurname)) {
+                driver.findElement(By.xpath("//span[@onclick='deletePerson(" + index + ")']")).click();
+            }
+        }
+    }
+
+    @Then("^I see person is removed$")
+    public void iSeePersonIsRemoved() {
+        System.out.println("\nAmount of persons after deletion: " + peopleWjobs.personsList().size());
+    }
+
+    @Then("^I click Reset list button$")
+    public void iClickResetListButton() {
+        peopleWjobs.clickResetList();
+    }
+
+    @Then("^I click Clear all fields button$")
+    public void iClickClearAllFieldsButton() throws Throwable {
+        peopleWjobs_NewPerson.clickClearAllFields();
+    }
+
+    @Then("^I see that registration form was reset to default$")
+    public void iSeeThatRegistrationFormWasResetToDefault()  throws Throwable {
+        peopleWjobs_NewPerson.checkThatNewPersonFormIsClean();
+        Thread.sleep(5000);
     }
 }
