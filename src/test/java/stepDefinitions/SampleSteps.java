@@ -21,7 +21,7 @@ public class SampleSteps {
 
 
     public SampleSteps() {
-        this.driver = Hooks.driver;
+        this.driver = stepDefinitions.Hooks.driver;
     }
 
     @Given("^I am on the home page$")
